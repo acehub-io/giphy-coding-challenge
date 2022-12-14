@@ -10,6 +10,9 @@ function App() {
   return (
     <Router history={history}>
       <div className='App'>
+        <Routes>
+          <Route exact path='/' element={<SearchButton text='GIF' />} />
+        </Routes>
       </div>
     </Router>
   );
