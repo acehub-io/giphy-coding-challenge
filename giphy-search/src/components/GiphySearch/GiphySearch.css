@@ -1,0 +1,24 @@
+input {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 10px 30px;
+  gap: 30px;
+  border: none;
+  width: 300px;
+  left: 45px;
+  top: 30.92%;
+  bottom: 64.34%;
+  margin: 18px;
+  background: #ffffff;
+  border-radius: 10px;
+}
+
+.container-giphy-list {
+  height: 408px;
+  left: 27px;
+  top: 243px;
+  padding: 18px;
+  background: #ececec;
+  border-radius: 10px;
+}
