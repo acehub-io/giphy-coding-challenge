@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import SearchLink from '../SearchLink/SearchLink';
 import './GiphySearch.css';
 
 let APIKEY = 'XsI4tsmH0t4FjJ0SXp6nVIkDN6mXD2GS';
@@ -27,7 +28,7 @@ function GiphySearch() {
   const handleClick = (e) => {
     setShowSearchContainer(false);
     setGif(e.target);
-    setValue('Search giphy');
+    setValue(e.target.value);
   };
 
   return (
@@ -50,7 +51,7 @@ function GiphySearch() {
                 return (
                   <div id={item.id}>
                     <img
-                      className='gif-img'
+                      className='gif-downsized'
                       alt='gif'
                       src={item.images.downsized.url}
                       onClick={(e) => handleClick(e)}
@@ -62,8 +63,10 @@ function GiphySearch() {
         </div>
       )}
       {gif.length !== 0 && (
-        <div className='gif-upsized-container' id={gif.id}>
-          <img className='gif-upsized' alt={gif.alt} src={gif.src} />
+        <div>
+          <div className='gif-upsized-container' id={gif.id}>
+            <img className='gif-upsized' alt={gif.alt} src={gif.src} />
+          </div>
         </div>
       )}
     </>
