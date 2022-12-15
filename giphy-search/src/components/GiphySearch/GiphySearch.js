@@ -1,7 +1,5 @@
-import { useEffect, useState } from 'react';
-import SearchButton from '../SearchButton/SearchButton';
+import { useState } from 'react';
 import './GiphySearch.css';
-import { Link } from 'react-router-dom';
 
 let APIKEY = 'XsI4tsmH0t4FjJ0SXp6nVIkDN6mXD2GS';
 
@@ -9,6 +7,7 @@ function GiphySearch() {
   const [data, setData] = useState([]);
   const [gif, setGif] = useState([]);
   const [value, setValue] = useState('Search giphy');
+  const [showSearchContainer, setShowSearchContainer] = useState(true);
 
   function searchGif(e) {
     let url = `https://api.giphy.com/v1/gifs/search?api_key=${APIKEY}&limit=12&q=${e.target.value}`;
@@ -26,46 +25,48 @@ function GiphySearch() {
   }
 
   const handleClick = (e) => {
-    setData([]);
+    setShowSearchContainer(false);
     setGif(e.target);
     setValue('Search giphy');
   };
 
   return (
-    <div className='container-giphy-list'>
-      <input
-        type='text'
-        defaultValue={value}
-        name='name'
-        onFocus={(e) => {
-          e.target.value = '';
-        }}
-        onChange={(e) => searchGif(e)}
-      ></input>
-      <Link to='/'>
-        <SearchButton text='X' />
-      </Link>
-      <div className='gif-results-container'>
-        {data &&
-          data.map((item) => {
-            return (
-              <div id={item.id}>
-                <img
-                  className='gif-img'
-                  alt='gif'
-                  src={item.images.downsized.url}
-                  onClick={(e) => handleClick(e)}
-                />
-              </div>
-            );
-          })}
-      </div>
+    <>
+      {showSearchContainer && (
+        <div className='container-giphy-list'>
+          <input
+            type='text'
+            defaultValue={value}
+            name='name'
+            onFocus={(e) => {
+              e.target.value = '';
+            }}
+            onChange={(e) => searchGif(e)}
+          ></input>
+
+          <div className='gif-results-container'>
+            {data &&
+              data.map((item) => {
+                return (
+                  <div id={item.id}>
+                    <img
+                      className='gif-img'
+                      alt='gif'
+                      src={item.images.downsized.url}
+                      onClick={(e) => handleClick(e)}
+                    />
+                  </div>
+                );
+              })}
+          </div>
+        </div>
+      )}
       {gif.length !== 0 && (
-        <div id={gif.id}>
+        <div className='gif-upsized-container' id={gif.id}>
           <img className='gif-upsized' alt={gif.alt} src={gif.src} />
         </div>
       )}
-    </div>
+    </>
   );
 }
 export default GiphySearch;
