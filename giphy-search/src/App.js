@@ -14,17 +14,25 @@ function App() {
           <Route
             exact
             path='/'
-            element={<SearchLink to='/list' text='GIF' variant='border' />}
+            element={<SearchLink to='/search' text='GIF' variant='border' />}
           />
         </Routes>
         <Routes>
-          <Route path='/list' element={<GiphySearch />} />
+          <Route path='/search' element={<GiphySearch />} />
         </Routes>
         <Routes>
-          <Route exact path='/list' element={<SearchLink to='/' text='X' />} />
+          <Route
+            exact
+            path='/search'
+            element={<SearchLink to='/' text='X' />}
+          />
         </Routes>
         <Routes>
-          <Route exact path='/gif' element={<SearchLink to='/' text='X' />} />
+          <Route
+            exact
+            path='/gif'
+            element={<SearchLink to='/search' text='GIF' variant='border' />}
+          />
         </Routes>
       </div>
     </Router>
