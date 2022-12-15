@@ -1,18 +1,17 @@
 input {
-  padding: 10px 40px;
-  gap: 30px;
-  border: none;
-  width: 220px;
-  background-origin: content-box;
-  margin: 18px;
-  background: #ffffff;
-  border-radius: 10px;
-  background-image: url('./search.svg');
   background-repeat: no-repeat;
+  background-image: url('./search.svg');
   background-position: 5%;
   background-size: 1.1em;
+  border: none;
+  border-radius: 10px;
   font-size: 13px;
-  color: #858585;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  margin: 18px;
+  padding: 10px 40px;
+  width: 220px;
 }
 
 input:focus {
@@ -20,28 +19,37 @@ input:focus {
 }
 
 .container-giphy-list {
-  min-height: 408px;
-  width: 336px;
-  overflow-x: auto;
   background: #ececec;
   border-radius: 10px;
   margin-bottom: 24px;
+  min-height: 408px;
+  overflow-x: hidden;
+  width: 336px;
 }
 
-.gif-img {
-  height: 144px;
+.gif-downsized {
+  width: 138px;
 }
 
 .gif-results-container {
   display: flex;
   flex-wrap: wrap;
+  height: 200px;
   justify-content: space-around;
-  width: 100%;
-  padding: 0 22px;
   margin: 0;
+  width: 100%;
+}
+
+.gif-upsized-container {
+  display: flex;
+  justify-content: center;
 }
 
 .gif-upsized {
-  height: 100%;
-  padding: 10px 0;
+  width: 90%;
+}
+
+.test {
+  display: flex;
+  justify-content: end;
 }
