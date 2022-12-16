@@ -1,7 +1,5 @@
 import { useState } from 'react';
-import SearchLink from '../SearchLink/SearchLink';
 import './GiphySearch.css';
-
 let APIKEY = 'XsI4tsmH0t4FjJ0SXp6nVIkDN6mXD2GS';
 
 function GiphySearch() {
@@ -49,14 +47,13 @@ function GiphySearch() {
             {data &&
               data.map((item) => {
                 return (
-                  <div id={item.id}>
-                    <img
-                      className='gif-downsized'
-                      alt='gif'
-                      src={item.images.downsized.url}
-                      onClick={(e) => handleClick(e)}
-                    />
-                  </div>
+                  <img
+                    id={item.id}
+                    className='gif-downsized'
+                    alt='gif'
+                    src={item.images.downsized.url}
+                    onClick={(e) => handleClick(e)}
+                  />
                 );
               })}
           </div>

@@ -27,13 +27,6 @@ function App() {
             element={<SearchLink to='/' text='X' />}
           />
         </Routes>
-        <Routes>
-          <Route
-            exact
-            path='/gif'
-            element={<SearchLink to='/search' text='GIF' variant='border' />}
-          />
-        </Routes>
       </div>
     </Router>
   );
