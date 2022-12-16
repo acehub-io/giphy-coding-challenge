@@ -22,7 +22,7 @@ input:focus {
   background: #ececec;
   border-radius: 10px;
   margin-bottom: 24px;
-  min-height: 408px;
+  height: 408px;
   overflow-x: hidden;
   width: 336px;
 }
