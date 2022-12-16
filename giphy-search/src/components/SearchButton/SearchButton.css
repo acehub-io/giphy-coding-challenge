@@ -43,8 +43,9 @@ span {
   align-items: center;
   display: flex;
   flex-direction: column;
-  height: 800px;
-  justify-content: center;
+  height: 700px;
+  justify-content: end;
+  margin: 20px 0;
 }
 
 .search-container {

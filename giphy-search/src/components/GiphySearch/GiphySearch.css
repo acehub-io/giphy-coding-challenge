@@ -11,7 +11,7 @@ input {
   font-weight: 700;
   margin: 18px;
   padding: 10px 40px;
-  width: 220px;
+  width: 205px;
 }
 
 input:focus {
@@ -29,27 +29,15 @@ input:focus {
 
 .gif-downsized {
   width: 138px;
+  padding: 5px;
 }
 
 .gif-results-container {
   display: flex;
   flex-wrap: wrap;
-  height: 200px;
-  justify-content: space-around;
-  margin: 0;
-  width: 100%;
-}
-
-.gif-upsized-container {
-  display: flex;
   justify-content: center;
 }
 
 .gif-upsized {
-  width: 90%;
-}
-
-.test {
-  display: flex;
-  justify-content: end;
+  height: initial;
 }
