@@ -1,0 +1,43 @@
+input {
+  background-repeat: no-repeat;
+  background-image: url('./search.svg');
+  background-position: 5%;
+  background-size: 1.1em;
+  border: none;
+  border-radius: 10px;
+  font-size: 13px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  margin: 18px;
+  padding: 10px 40px;
+  width: 205px;
+}
+
+input:focus {
+  outline: none;
+}
+
+.container-giphy-list {
+  background: #ececec;
+  border-radius: 10px;
+  margin-bottom: 24px;
+  height: 408px;
+  overflow-x: hidden;
+  width: 336px;
+}
+
+.gif-results-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.gif-downsized {
+  width: 138px;
+  padding: 5px;
+}
+
+.gif-upsized {
+  height: initial;
+}
