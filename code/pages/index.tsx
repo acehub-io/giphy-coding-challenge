@@ -2,10 +2,21 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from '@next/font/google'
 import styles from '../styles/Home.module.css'
+import { useState } from "react";
+
 
 const inter = Inter({ subsets: ['latin'] })
+import { Grid } from '@giphy/react-components'
+import { GiphyFetch } from '@giphy/js-fetch-api'
 
 export default function Home() {
+
+  const gf = new GiphyFetch(process.env.GIPHY_API_KEY as string)
+
+  // configure your fetch: fetch 10 gifs at a time as the user scrolls (offset is handled by the grid)
+  const fetchGifs = (offset: number) => gf.search("omg", { offset, limit: 12 })
+  const [score, setScore] = useState(0);
+  const increaseScore = () => setScore(score + 1);
   return (
     <>
       <Head>
@@ -15,8 +26,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
+        <Grid width={300} columns={3} fetchGifs={fetchGifs} />
         <div className={styles.description}>
-          <p className="text-3xl font-bold underline" >
+          <p>
             Get started by editing&nbsp;
             <code className={styles.code}>pages/index.tsx</code>
           </p>
