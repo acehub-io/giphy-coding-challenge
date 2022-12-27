@@ -22,18 +22,26 @@ export default function Home() {
   const [screenState, setScreenState] = useState(viewStates[0]);
   const [buttonState, setButtonState] = useState("GIF");
   const [searchContent, setSearchContent] = useState("OMG");
-  const [data, setData] = useState<any | null>(null);
-  const [isLoading, setLoading] = useState(false)
   const [gifs, setGifs] = useState<any | null>(null);
 
   const gf = new GiphyFetch(process.env.GIPHY_API_KEY as string)
 
+  const fetchGifs = ()=>{
+    gf.search(searchContent, { sort: 'relevant', limit: 12 }).then(result => {
+      gifArray = result.data.map((e, i) => { return <GIF src={e.images.original.url} key={i} /> });
+      setGifs(gifArray)
+    })
+  }
+
+  const handleSearchContent = (content:string) => {
+    setSearchContent(content);
+    fetchGifs();
+  };
+
   let gifArray = [] as any;
-  useEffect( () => {
-    gf.search("omg", { sort: 'relevant', limit:12 }).then(result => {
-        gifArray = result.data.map((e, i) => { return <GIF src={e.images.original.url} key={i} /> });
-        setGifs(gifArray)
-      })
+
+  useEffect(() => {
+    // fetchGifs();
   }, [])
 
   return (
@@ -47,9 +55,9 @@ export default function Home() {
       {/* <Grid width={1400} columns={3} fetchGifs={fetchGifs} /> */}
 
       <main className={styles.main}>
-        <SearchBar content='omg' />
+        <SearchBar content={searchContent} onChange={handleSearchContent} />
         <Grid gifs={gifs} />
-        <Button state={buttonState} />
+        <Button state={true} />
       </main>
     </>
   )
