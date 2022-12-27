@@ -1,12 +1,14 @@
+import { useEffect, useRef } from "react";
+
 interface GIFProps {
     src: string;
 };
 
 const GIF: React.FC<GIFProps> = ({ src }) => {
     return (
-        <div className="gif">
-            <img className="mb-4" alt="gif" src={src} />
-        </div>
+
+        <img className="mb-4 min-h-[50%]" src={src} alt="gif" />
+
     )
 }
 

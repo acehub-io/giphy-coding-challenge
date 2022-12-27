@@ -20,26 +20,50 @@ const viewStates = ['initial', 'search', 'grid', 'detail'];
 
 export default function Home() {
   const [screenState, setScreenState] = useState(viewStates[0]);
-  const [buttonState, setButtonState] = useState("GIF");
+  const [buttonText, setButtonText] = useState("GIF");
+  const [buttonState, setButtonState] = useState(true);
+  const [searchState, setSearchState] = useState(false);
   const [searchContent, setSearchContent] = useState("OMG");
   const [gifs, setGifs] = useState<any | null>(null);
+  const [selectedGIF, setSelectedGIF] = useState<any | null>(null);
 
   const gf = new GiphyFetch(process.env.GIPHY_API_KEY as string)
 
-  const fetchGifs = ()=>{
+  let gifArray = [] as any;
+  const fetchGifs = () => {
     gf.search(searchContent, { sort: 'relevant', limit: 12 }).then(result => {
       gifArray = result.data.map((e, i) => { return <GIF src={e.images.original.url} key={i} /> });
       setGifs(gifArray)
     })
   }
 
-  const handleSearchContent = (content:string) => {
+  const handleSearchContent = (content: string) => {
     setSearchContent(content);
     fetchGifs();
   };
 
-  let gifArray = [] as any;
+  const handleGIFClick = (event: any) => {
+    setSearchState(false)
+    let selectedGIF = <GIF src={event.target.currentSrc} key={1} />
+    setSelectedGIF(selectedGIF)
+    gifArray = []
+    setGifs(gifArray)
+  };
 
+  const handleButtonClick = () => {
+    if (buttonState) {
+      setSearchState(true)
+      setSelectedGIF(null)
+      setButtonText("X");
+      setButtonState(!buttonState)
+    }
+    else {
+      setSearchState(false)
+      setButtonText("GIF");
+      setSelectedGIF(null)
+      setButtonState(!buttonState)
+    }
+  }
   useEffect(() => {
     // fetchGifs();
   }, [])
@@ -55,9 +79,10 @@ export default function Home() {
       {/* <Grid width={1400} columns={3} fetchGifs={fetchGifs} /> */}
 
       <main className={styles.main}>
-        <SearchBar content={searchContent} onChange={handleSearchContent} />
-        <Grid gifs={gifs} />
-        <Button state={true} />
+        {searchState && <SearchBar content={searchContent} onChange={handleSearchContent} />}
+        {selectedGIF ? selectedGIF : <Grid gifs={gifs} onClick={handleGIFClick} />}
+        <Button state={buttonState} text={buttonText} onClick={handleButtonClick} />
+
       </main>
     </>
   )

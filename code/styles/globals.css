@@ -30,9 +30,8 @@ body {
 }
 
 .grid{
-  width: 100%;
-  height: 50%;
-  max-height: 50%;
+  @apply w-full h-1/2 max-h-[50%];
+
 }
 
 .searchbar{
