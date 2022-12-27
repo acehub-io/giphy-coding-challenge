@@ -12,7 +12,7 @@ import { IGif } from '@giphy/js-types'
 
 import { GiphyFetch } from '@giphy/js-fetch-api'
 import Button from '../components/Button';
-import GIF from '../components/Gif';
+import GIF from '../components/GIF';
 import Grid from '../components/Grid';
 import SearchBar from '../components/SearchBar';
 

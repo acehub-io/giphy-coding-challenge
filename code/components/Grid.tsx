@@ -1,5 +1,3 @@
-import GIF from "./Gif";
-
 interface GridProps {
     gifs: Array<JSX.Element>
     onClick: (e:any) => void
