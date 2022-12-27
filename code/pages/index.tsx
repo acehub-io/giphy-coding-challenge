@@ -2,11 +2,14 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from '@next/font/google'
 import styles from '../styles/Home.module.css'
-import { useState } from "react";
+import { useState, useEffect } from 'react'
 
 
 const inter = Inter({ subsets: ['latin'] })
 // import { Grid } from '@giphy/react-components'
+import { IGif } from '@giphy/js-types'
+
+
 import { GiphyFetch } from '@giphy/js-fetch-api'
 import Button from '../components/Button';
 import GIF from '../components/Gif';
@@ -16,18 +19,22 @@ import SearchBar from '../components/SearchBar';
 const viewStates = ['initial', 'search', 'grid', 'detail'];
 
 export default function Home() {
+  const [screenState, setScreenState] = useState(viewStates[0]);
+  const [buttonState, setButtonState] = useState("GIF");
+  const [searchContent, setSearchContent] = useState("OMG");
+  const [data, setData] = useState<any | null>(null);
+  const [isLoading, setLoading] = useState(false)
+  const [gifs, setGifs] = useState<any | null>(null);
 
   const gf = new GiphyFetch(process.env.GIPHY_API_KEY as string)
 
-  // const fetchGifs = (offset: number) => gf.search("omg", { offset, limit: 12 })
-  const [screenState, setScreenState] = useState(viewStates[0]);
-  const [buttonState, setButtonState] = useState("GIF");
-
-  let gifs = []
-
-  for (let i = 0; i < 10; i++) {
-    gifs.push(<GIF src={'https://source.unsplash.com/random' + '/' + i} key={i} />)
-  }
+  let gifArray = [] as any;
+  useEffect( () => {
+    gf.search("omg", { sort: 'relevant', limit:12 }).then(result => {
+        gifArray = result.data.map((e, i) => { return <GIF src={e.images.original.url} key={i} /> });
+        setGifs(gifArray)
+      })
+  }, [])
 
   return (
     <>

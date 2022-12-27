@@ -1,7 +1,7 @@
 import GIF from "./Gif";
 
 interface GridProps {
-    gifs: any
+    gifs: Array<JSX.Element>
 }
 
 const Grid: React.FC<GridProps> = ({gifs}) => {
