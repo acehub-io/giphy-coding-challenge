@@ -32,3 +32,18 @@ Please have a look at the provided [Figma design](https://www.figma.com/file/Vs4
 
 Asking questions is good​. We are happy to help and will not penalize you for
 asking questions (just drop a line to h.schwager@acehub.io).
+
+
+## Getting Started
+
+Navigate to code folder
+
+```
+cd code
+```
+
+Run the dev version
+
+``` 
+npm run dev
+```
