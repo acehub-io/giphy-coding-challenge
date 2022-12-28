@@ -1,0 +1,3 @@
+.main {
+  @apply flex flex-col justify-start md:justify-evenly items-center h-screen;
+}
