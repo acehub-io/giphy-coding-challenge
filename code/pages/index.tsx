@@ -1,14 +1,6 @@
 import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from '@next/font/google'
 import styles from '../styles/Home.module.css'
 import { useState, useEffect } from 'react'
-
-
-const inter = Inter({ subsets: ['latin'] })
-// import { Grid } from '@giphy/react-components'
-import { IGif } from '@giphy/js-types'
-
 
 import { GiphyFetch } from '@giphy/js-fetch-api'
 import Button from '../components/Button';
@@ -16,10 +8,8 @@ import GIF from '../components/GIF';
 import Grid from '../components/Grid';
 import SearchBar from '../components/SearchBar';
 
-const viewStates = ['initial', 'search', 'grid', 'detail'];
 
 export default function Home() {
-  const [screenState, setScreenState] = useState(viewStates[0]);
   const [buttonText, setButtonText] = useState("GIF");
   const [buttonState, setButtonState] = useState(true);
   const [searchState, setSearchState] = useState(false);
@@ -29,25 +19,27 @@ export default function Home() {
 
   const gf = new GiphyFetch(process.env.GIPHY_API_KEY as string)
 
-  let gifArray = [] as any;
-  const fetchGifs = () => {
-    gf.search(searchContent, { sort: 'relevant', limit: 12 }).then(result => {
-      gifArray = result.data.map((e, i) => { return <GIF src={e.images.original.url} key={i} /> });
-      setGifs(gifArray)
+  const fetchGifs = async () => {
+    return await gf.search(searchContent, { sort: 'relevant', limit: 12 }).then(result => {
+      return result.data.map((e, i) => { return <GIF src={e.images.original.url} key={i} /> });
     })
   }
+  useEffect(()=>{
+    // fetchGifs().then(d => setGifs(d));
+  },[gifs]);
 
-  const handleSearchContent = (content: string) => {
+  const handleSearchContent = async(content: string) => {
     setSearchContent(content);
-    fetchGifs();
+    let data = await fetchGifs();
+    console.log(data);
+    // setGifs(data);
   };
 
   const handleGIFClick = (event: any) => {
     setSearchState(false)
     let selectedGIF = <GIF src={event.target.currentSrc} key={1} />
     setSelectedGIF(selectedGIF)
-    gifArray = []
-    setGifs(gifArray)
+    setGifs([])
   };
 
   const handleButtonClick = () => {
@@ -64,10 +56,6 @@ export default function Home() {
       setButtonState(!buttonState)
     }
   }
-  useEffect(() => {
-    // fetchGifs();
-  }, [])
-
   return (
     <>
       <Head>
@@ -76,14 +64,14 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {/* <Grid width={1400} columns={3} fetchGifs={fetchGifs} /> */}
 
       <main className={styles.main}>
-        {searchState && <SearchBar content={searchContent} onChange={handleSearchContent} />}
+        {searchState && <SearchBar onChange={handleSearchContent} />}
         {selectedGIF ? selectedGIF : <Grid gifs={gifs} onClick={handleGIFClick} />}
         <Button state={buttonState} text={buttonText} onClick={handleButtonClick} />
 
       </main>
     </>
   )
+
 }

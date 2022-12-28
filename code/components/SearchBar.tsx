@@ -1,9 +1,8 @@
 interface SearchProps {
-    content: string;
     onChange: (n: string) => void
 };
 
-const SearchBar: React.FC<SearchProps> = ({ content, onChange }) => {
+const SearchBar: React.FC<SearchProps> = ({onChange }) => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         onChange(e.target.value)
     }
