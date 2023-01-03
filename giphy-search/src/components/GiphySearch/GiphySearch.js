@@ -33,10 +33,9 @@ function GiphySearch() {
     <>
       {showSearchContainer && (
         <div className='container-giphy-list'>
-          <input
+          <input className='giphy-input-search'
             type='text'
             defaultValue={value}
-            name='name'
             onFocus={(e) => {
               e.target.value = '';
             }}

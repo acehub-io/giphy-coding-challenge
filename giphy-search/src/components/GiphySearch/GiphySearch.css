@@ -1,4 +1,4 @@
-input {
+.giphy-input-search {
   background-repeat: no-repeat;
   background-image: url('./search.svg');
   background-position: 5%;
@@ -14,7 +14,7 @@ input {
   width: 205px;
 }
 
-input:focus {
+.giphy-input-search:focus {
   outline: none;
 }
 
