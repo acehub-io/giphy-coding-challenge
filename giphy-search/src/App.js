@@ -3,6 +3,7 @@ import { createBrowserHistory } from 'history';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import GiphySearch from './components/GiphySearch/GiphySearch';
 import SearchLink from './components/SearchLink/SearchLink';
+import './App.css';
 
 const history = createBrowserHistory();
 
